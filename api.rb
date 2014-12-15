@@ -2,9 +2,20 @@ require 'rubygems'
 require 'sinatra'
 require 'json'
 require 'mysql2'
+require 'active_record'
+ActiveRecord::Base.establish_connection(
+  :adapter  => "mysql",
+  :host     => "us-cdbr-iron-east-01.cleardb.net",
+  :username => "b95f27f43494d3",
+  :password => "fdc1a2c0",
+  :database => "heroku_f6d9ffc0616bc7e"
+)
 
-=begin
-class API < Sinatra::Base
+get '/' do
+    '<html><body><h1>Place-it!</h1></body></html>'
+end
+
+=begin class API < Sinatra::Base
 
   beacon_id = "B9407F30-F5F8-466E-AFF9-25556B57FE6D" 
 
@@ -19,11 +30,8 @@ class API < Sinatra::Base
     $redis.set("B9407F30-F5F8-466E-AFF9-25556B57FE6D:61334:32857", "Purple")
     $redis.set("B9407F30-F5F8-466E-AFF9-25556B57FE6D:21137:30314", "Blue")
   end
-=end
-  get '/' do
-    '<html><body><h1>Place-it!</h1></body></html>'
-  end
-=begin
+
+
   # Test locally w/ 'curl -i http://localhost:5000/rooms.json'
   #                 'curl -i http://localhost:5000/rooms.json\?beacon_id=abc\&maj_val\=1\&min_val\=1'
   get '/beacons.json' do
